@@ -5,6 +5,11 @@ All notable changes to kiro-gdrive are documented here. Newest first.
 ## 2026.10.17
 
 ### What Changed
+- **Ships its own Google sign-in client.** `client.json` was empty, so every sign-in fell back to rclone's shared
+  client, which rclone retires during 2026 and which hits Google's rate limit quickly. It now holds the Desktop
+  client of the new `kiro-gdrive` Google Cloud project (In production, `drive.readonly`, privacy policy on
+  kiroproject.be). Tested on hq: sign-in passes the read-only scope check and `status` shows "OAuth client:
+  kiro-gdrive". The project's Audience page now counts the app's users.
 - Initial package: mount shared Google Drive folders read-only from a share link, through a GTK4 window or the
   `kiro-gdrive` / `kgd` command line. A share mounts at `~/GoogleDrive/<name>` and remounts at every login.
 - **Daily "new files" notification through kiro-news.** Once a day every share is checked for new or changed

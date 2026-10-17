@@ -57,6 +57,10 @@ usr/share/kiro-gdrive/
   secret as non-confidential, so shipping it is normal (rclone ships its own the same way).
 - A user's `~/.config/kiro-gdrive/client.json` overrides the shipped one.
 - If both are empty, rclone's built-in client is used, which rclone retires during 2026.
+- The shipped client lives in Google Cloud project **`kiro-gdrive`** (id `kiro-gdrive-511912`), created 2026-10-17.
+  Until then `client.json` shipped empty, so every sign-in silently used rclone's client. Its Audience page shows
+  the user count ("N users / 100 user cap"). Privacy policy: https://kiroproject.be/kiro-gdrive-privacy.html.
+  Google never shows the secret again: keep the downloaded JSON safe, or add a new secret on the client.
 - `drive.readonly` is a Google *restricted* scope. Until the app passes Google verification, users see an
   "unverified app" screen and at most 100 users can sign in.
 - The consent screen must be **"In production"**, not "Testing". Google gives a Testing-status app's refresh tokens

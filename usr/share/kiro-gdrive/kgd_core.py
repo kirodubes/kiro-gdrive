@@ -121,7 +121,7 @@ def install_rclone():
     if term is None:
         return Result(False, f"No terminal found; install rclone with: {_INSTALL_COMMAND}")
     script = (
-        'echo "Kiro Google Drive is running this command on your system:"; echo; '
+        'echo "KiroTux Drive is running this command on your system:"; echo; '
         f'echo "    {_INSTALL_COMMAND}"; echo; '
         f'{_INSTALL_COMMAND}; '
         'echo; read -rp "Press enter to close. "'

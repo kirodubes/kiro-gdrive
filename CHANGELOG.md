@@ -5,6 +5,10 @@ All notable changes to kiro-gdrive are documented here. Newest first.
 ## 2026.10.17
 
 ### What Changed
+- **Renamed to KiroTux Drive** (window title, menu entry, README). Google's OAuth review refused "Kiro Google
+  Drive" as the consent-screen name (no Google trademarks in an app name), and the reviewers compare the app with
+  the consent screen, so the app now carries the same name. The package stays `kiro-gdrive`, the commands stay
+  `kiro-gdrive` / `kgd`, and all paths (`~/GoogleDrive`, `~/.config/kiro-gdrive`) are unchanged.
 - **Ships its own Google sign-in client.** `client.json` was empty, so every sign-in fell back to rclone's shared
   client, which rclone retires during 2026 and which hits Google's rate limit quickly. It now holds the Desktop
   client of the new `kiro-gdrive` Google Cloud project (In production, `drive.readonly`, privacy policy on

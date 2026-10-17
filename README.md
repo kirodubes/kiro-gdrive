@@ -2,12 +2,14 @@
   <img src="kiro.jpg" alt="Kiro" width="220" />
 </p>
 
-# Kiro Google Drive
+# KiroTux Drive
+
+_Formerly called Kiro Google Drive. The package is still `kiro-gdrive`, the command still `kiro-gdrive` / `kgd`._
 
 Mount a shared Google Drive folder in your home folder: paste the share link, sign in once, and the folder shows
 up under `~/GoogleDrive/<name>`. It mounts again by itself every time you log in.
 
-Kiro Google Drive is a small GTK4 app with a matching command-line interface. Under the hood it drives
+KiroTux Drive is a small GTK4 app with a matching command-line interface. Under the hood it drives
 [rclone](https://rclone.org/) and a systemd user service, so nothing runs as root and nothing touches your own
 rclone setup.
 
@@ -47,7 +49,7 @@ sudo pacman -S kiro-gdrive
 
 ## Using it
 
-Open **Kiro Google Drive** from your menu, click **Sign in with Google**, paste a folder link and click
+Open **KiroTux Drive** from your menu, click **Sign in with Google**, paste a folder link and click
 **Add and mount**.
 
 From a terminal (`kgd` is a short alias for `kiro-gdrive`):

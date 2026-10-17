@@ -14,7 +14,7 @@ import log  # noqa: E402
 
 
 _INTRO = (
-    "A shared Google Drive folder normally only opens in a web browser. Kiro Google Drive puts it in your home "
+    "A shared Google Drive folder normally only opens in a web browser. KiroTux Drive puts it in your home "
     "folder instead, so you can open, copy and play its files from your file manager like any other folder."
 )
 
@@ -47,7 +47,7 @@ class MainWindow(Gtk.ApplicationWindow):
     """Main application window."""
 
     def __init__(self, app, base_dir):
-        super().__init__(application=app, title="Kiro Google Drive")
+        super().__init__(application=app, title="KiroTux Drive")
         self.set_default_size(820, 720)
         self._load_css(base_dir)
         self._busy = False

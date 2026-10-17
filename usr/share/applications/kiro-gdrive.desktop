@@ -1,5 +1,5 @@
 [Desktop Entry]
-Name=Kiro Google Drive
+Name=KiroTux Drive
 GenericName=Google Drive Folder Mounter
 Comment=Mount shared Google Drive folders read-only in your home folder
 Exec=/usr/bin/kiro-gdrive

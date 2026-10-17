@@ -4,7 +4,7 @@ This file provides guidance to Claude Code when working with code in this reposi
 
 ## Project Overview
 
-kiro-gdrive mounts shared Google Drive folders **read-only** from a share link. It is a GTK4 Python app with a CLI
+kiro-gdrive (shown to users as **KiroTux Drive** since 2026-10-17; Google refused a consent-screen name with "Google" in it, so never put "Google" back in the visible name) mounts shared Google Drive folders **read-only** from a share link. It is a GTK4 Python app with a CLI
 over the same core, driving `rclone` and a systemd user unit. It is per-user (no sudo, no pkexec; never add root
 escalation) and ships in `nemesis_repo`.
 

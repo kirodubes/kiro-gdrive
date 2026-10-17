@@ -13,12 +13,42 @@ import kgd_core  # noqa: E402
 import log  # noqa: E402
 
 
+_INTRO = (
+    "A shared Google Drive folder normally only opens in a web browser. Kiro Google Drive puts it in your home "
+    "folder instead, so you can open, copy and play its files from your file manager like any other folder."
+)
+
+_WHY = (
+    "<b>Why do I need to sign in?</b>\n"
+    "Google only lets programs read Drive files on behalf of a Google account, even for folders shared with "
+    "“anyone with the link”. Any Google account that can open the link will do.\n\n"
+    "<b>Why does a browser open?</b>\n"
+    "You sign in on Google's own page, so this app never sees your password. Choose your account and click "
+    "<i>Allow</i>; Google then hands this app a key that can only read files.\n\n"
+    "<b>What can it do with that access?</b>\n"
+    "Only look and download. It cannot change, upload or delete anything on your Drive. Google describes this as "
+    "“See and download all your Google Drive files”, but the app only opens the folders you add here. "
+    "Nothing is sent anywhere else: files go straight from Google to your computer.\n\n"
+    "<b>Could someone turn it into write access?</b>\n"
+    "No. Read-only is part of the key itself, and Google enforces it on its own servers, so changing this app "
+    "cannot upgrade the key. Write access would need a new sign-in in which Google plainly asks to "
+    "“see, edit, create and delete” your files, and you would have to click <i>Allow</i> yourself.\n\n"
+    "<b>“Google hasn't verified this app”?</b>\n"
+    "Google shows this warning for small apps until they finish its review. Click <i>Advanced</i>, then "
+    "<i>Go to</i> the app to continue.\n\n"
+    "<b>Where is the key kept?</b>\n"
+    "In <tt>~/.config/kiro-gdrive/</tt>, readable only by you. <i>Sign out</i> deletes it and tells Google to "
+    "cancel it. You can also remove access at any time under Google Account → Security → "
+    "Third-party connections."
+)
+
+
 class MainWindow(Gtk.ApplicationWindow):
     """Main application window."""
 
     def __init__(self, app, base_dir):
         super().__init__(application=app, title="Kiro Google Drive")
-        self.set_default_size(820, 560)
+        self.set_default_size(820, 720)
         self._load_css(base_dir)
         self._busy = False
         self._build()
@@ -50,6 +80,15 @@ class MainWindow(Gtk.ApplicationWindow):
         for side in ("top", "bottom", "start", "end"):
             getattr(root, f"set_margin_{side}")(16)
         self.set_child(root)
+
+        intro = Gtk.Label(xalign=0, wrap=True, label=_INTRO)
+        root.append(intro)
+
+        self._why = Gtk.Expander(label="Why sign in, and why does a browser open?")
+        why_text = Gtk.Label(xalign=0, wrap=True, use_markup=True, label=_WHY, margin_top=8, margin_start=12)
+        why_text.add_css_class("kgd-why")
+        self._why.set_child(why_text)
+        root.append(self._why)
 
         account = Gtk.Box(spacing=12)
         account.add_css_class("kgd-card")
@@ -162,6 +201,7 @@ class MainWindow(Gtk.ApplicationWindow):
             self._account_label.set_text("Not signed in. Sign in once with the Google account that can open the links.")
             self._account_button.set_label("Sign in with Google")
         self._add_button.set_sensitive(signed_in and have_rclone and not self._busy)
+        self._why.set_expanded(not signed_in)
 
         def worker():
             shares = kgd_core.list_shares()
@@ -204,7 +244,8 @@ class MainWindow(Gtk.ApplicationWindow):
         elif kgd_core.is_signed_in():
             self._run("Signing out and unmounting all shares…", kgd_core.logout)
         else:
-            self._run("Waiting for you to sign in in your browser…", kgd_core.login)
+            self._run("Your browser now shows Google's sign-in page. Choose your account, click Allow, "
+                      "then come back here (this window waits up to 10 minutes)…", kgd_core.login)
 
     def _on_add_clicked(self, _widget):
         link = self._link_entry.get_text().strip()

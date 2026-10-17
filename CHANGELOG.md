@@ -10,6 +10,11 @@ All notable changes to kiro-gdrive are documented here. Newest first.
 - **Install rclone** button: when rclone is missing, the account row offers to install it in a visible terminal.
   The terminal shows `sudo pacman -S --needed rclone fuse3` and you type your own password there; the app itself
   never escalates.
+- The window explains itself in plain words. A short intro says what the app is for. A "Why sign in, and why does
+  a browser open?" section, open until you sign in, covers why Google needs an account, why sign-in happens on
+  Google's page (the app never sees your password), what read-only access allows, why read-only can't be turned
+  into write access, the "unverified app" warning, and where the key is kept and how to revoke it. The sign-in
+  wait message now says what to do in the browser.
 - Refuses to start as root. Under `sudo`, `~` is `/root`, so shares would land in `/root/GoogleDrive`, and
   `systemctl --user` has no session there.
 - Sign-in asks Google only for `drive.readonly`. After sign-in the granted scope is checked, and a token with

@@ -53,6 +53,9 @@ usr/share/kiro-gdrive/
 - If both are empty, rclone's built-in client is used, which rclone retires during 2026.
 - `drive.readonly` is a Google *restricted* scope. Until the app passes Google verification, users see an
   "unverified app" screen and at most 100 users can sign in.
+- The consent screen must be **"In production"**, not "Testing". Google gives a Testing-status app's refresh tokens
+  a 7-day lifetime, which would silently break mount-at-login every week. In production but unverified is fine:
+  that only means the warning screen and the 100-user cap.
 
 ## Development
 

@@ -111,6 +111,30 @@ def have_rclone():
     return shutil.which("rclone") is not None
 
 
+_TERMINALS = ("alacritty", "kitty", "foot", "xterm")
+_INSTALL_COMMAND = "sudo pacman -S --needed rclone fuse3"
+
+
+def install_rclone():
+    """Install rclone in a visible terminal, where the user sees the command and types the sudo password."""
+    term = next((t for t in _TERMINALS if shutil.which(t)), None)
+    if term is None:
+        return Result(False, f"No terminal found; install rclone with: {_INSTALL_COMMAND}")
+    script = (
+        'echo "Kiro Google Drive is running this command on your system:"; echo; '
+        f'echo "    {_INSTALL_COMMAND}"; echo; '
+        f'{_INSTALL_COMMAND}; '
+        'echo; read -rp "Press enter to close. "'
+    )
+    try:
+        subprocess.run([term, "-e", "bash", "-c", script], timeout=1800)
+    except (OSError, subprocess.SubprocessError) as err:
+        return Result(False, f"Could not start {term}: {err}")
+    if have_rclone():
+        return Result(True, "rclone installed")
+    return Result(False, "rclone is still not installed")
+
+
 def load_client():
     """Return (client_id, client_secret); a user override in CONFIG_DIR beats the shipped file."""
     for path in (os.path.join(CONFIG_DIR, "client.json"), os.path.join(BASE_DIR, "client.json")):

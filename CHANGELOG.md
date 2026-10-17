@@ -7,6 +7,11 @@ All notable changes to kiro-gdrive are documented here. Newest first.
 ### What Changed
 - Initial package: mount shared Google Drive folders read-only from a share link, through a GTK4 window or the
   `kiro-gdrive` / `kgd` command line. A share mounts at `~/GoogleDrive/<name>` and remounts at every login.
+- **Install rclone** button: when rclone is missing, the account row offers to install it in a visible terminal.
+  The terminal shows `sudo pacman -S --needed rclone fuse3` and you type your own password there; the app itself
+  never escalates.
+- Refuses to start as root. Under `sudo`, `~` is `/root`, so shares would land in `/root/GoogleDrive`, and
+  `systemctl --user` has no session there.
 - Sign-in asks Google only for `drive.readonly`. After sign-in the granted scope is checked, and a token with
   more than read-only access is revoked and refused.
 

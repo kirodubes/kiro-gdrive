@@ -49,6 +49,10 @@ def main():
     argv = sys.argv[1:]
     if os.environ.get("KGD_DEBUG"):
         log.DEBUG = True
+    # Under sudo, ~ is /root and systemctl --user has no session bus, so shares would land in /root and never mount.
+    if os.geteuid() == 0:
+        log.log_error("kiro-gdrive mounts folders for your own user: run it without sudo.")
+        sys.exit(1)
     if argv and not argv[0].startswith("-"):
         import kgd_cli
 

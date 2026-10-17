@@ -151,16 +151,17 @@ class MainWindow(Gtk.ApplicationWindow):
 
     def _refresh(self):
         signed_in = kgd_core.is_signed_in()
-        if not kgd_core.have_rclone():
-            self._account_label.set_text("rclone is not installed. Install it with: sudo pacman -S rclone")
-            self._account_button.set_visible(False)
+        have_rclone = kgd_core.have_rclone()
+        if not have_rclone:
+            self._account_label.set_text("rclone is needed to mount Google Drive folders, and it is not installed.")
+            self._account_button.set_label("Install rclone")
         elif signed_in:
             self._account_label.set_text("Signed in to Google (read-only access)")
             self._account_button.set_label("Sign out")
         else:
             self._account_label.set_text("Not signed in. Sign in once with the Google account that can open the links.")
             self._account_button.set_label("Sign in with Google")
-        self._add_button.set_sensitive(signed_in and not self._busy)
+        self._add_button.set_sensitive(signed_in and have_rclone and not self._busy)
 
         def worker():
             shares = kgd_core.list_shares()
@@ -198,7 +199,9 @@ class MainWindow(Gtk.ApplicationWindow):
     # ── Callbacks ────────────────────────────────────────────────────────
 
     def _on_account_clicked(self, _widget):
-        if kgd_core.is_signed_in():
+        if not kgd_core.have_rclone():
+            self._run("Installing rclone: type your password in the terminal window…", kgd_core.install_rclone)
+        elif kgd_core.is_signed_in():
             self._run("Signing out and unmounting all shares…", kgd_core.logout)
         else:
             self._run("Waiting for you to sign in in your browser…", kgd_core.login)

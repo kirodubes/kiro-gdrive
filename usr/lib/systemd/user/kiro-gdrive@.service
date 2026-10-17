@@ -1,0 +1,19 @@
+[Unit]
+Description=kiro-gdrive: Google Drive share %i (read-only)
+Documentation=https://github.com/kirodubes/kiro-gdrive
+# No network-online.target here: the user manager cannot see that system target.
+# Restart=on-failure covers a login that races the network instead.
+
+[Service]
+Type=notify
+# A crashed rclone leaves a dead FUSE mount ("Transport endpoint is not connected") that breaks mkdir;
+# lazily unmount any leftover first. The "-" prefix ignores failure when nothing is mounted.
+ExecStartPre=-/usr/bin/fusermount3 -uz %h/GoogleDrive/%i
+ExecStartPre=/usr/bin/mkdir -p %h/GoogleDrive/%i
+ExecStart=/usr/bin/rclone mount --config %h/.config/kiro-gdrive/rclone.conf %i: %h/GoogleDrive/%i --read-only --vfs-cache-mode full
+ExecStop=-/usr/bin/fusermount3 -uz %h/GoogleDrive/%i
+Restart=on-failure
+RestartSec=10
+
+[Install]
+WantedBy=default.target

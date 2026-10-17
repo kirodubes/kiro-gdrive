@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=Kiro Google Drive
+GenericName=Google Drive Folder Mounter
+Comment=Mount shared Google Drive folders read-only in your home folder
+Exec=/usr/bin/kiro-gdrive
+Icon=folder-remote
+Terminal=false
+Type=Application
+Categories=GTK;Network;FileTransfer;X-Kiro-Apps;
+Keywords=google;drive;gdrive;mount;rclone;share;cloud
+StartupNotify=true

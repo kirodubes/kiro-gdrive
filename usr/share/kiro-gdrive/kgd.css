@@ -1,0 +1,21 @@
+.kgd-card {
+    padding: 12px 16px;
+    border-radius: 8px;
+    background-color: alpha(currentColor, 0.06);
+}
+
+.kgd-message {
+    min-height: 1.4em;
+}
+
+.kgd-error {
+    color: #e5484d;
+}
+
+.kgd-on {
+    color: #30a46c;
+}
+
+.kgd-off {
+    color: alpha(currentColor, 0.35);
+}

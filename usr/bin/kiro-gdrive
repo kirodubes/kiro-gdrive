@@ -1,0 +1,118 @@
+#!/bin/bash
+set -euo pipefail
+#####################################################################
+# Author    : Erik Dubois
+# Website   : https://kiroproject.be
+#####################################################################
+#
+#   DO NOT JUST RUN THIS. EXAMINE AND JUDGE. RUN AT YOUR OWN RISK.
+#
+#   Purpose:
+#   - Launcher for kiro-gdrive. With no arguments it opens the GTK4
+#     window; with a subcommand (login, add, list, mount, ...) it runs
+#     the command-line interface instead.
+#
+#   Why: one entry point for the desktop menu, the terminal and SSH
+#   sessions without a display.
+#
+#####################################################################
+
+SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+APP="/usr/share/kiro-gdrive/kiro-gdrive.py"
+
+#####################################################################
+# Colors
+#####################################################################
+if command -v tput >/dev/null 2>&1 && [[ -t 1 ]]; then
+    RED="$(tput setaf 1)"
+    GREEN="$(tput setaf 2)"
+    YELLOW="$(tput setaf 3)"
+    BLUE="$(tput setaf 4)"
+    CYAN="$(tput setaf 6)"
+    RESET="$(tput sgr0)"
+else
+    RED="" GREEN="" YELLOW="" BLUE="" CYAN="" RESET=""
+fi
+
+#####################################################################
+# Logging
+#####################################################################
+log_section() {
+    echo
+    echo "${GREEN}############################################################################${RESET}"
+    echo "$1"
+    echo "${GREEN}############################################################################${RESET}"
+    echo
+}
+
+log_info() {
+    echo
+    echo "${BLUE}############################################################################${RESET}"
+    echo "$1"
+    echo "${BLUE}############################################################################${RESET}"
+    echo
+}
+
+log_warn() {
+    echo
+    echo "${YELLOW}############################################################################${RESET}"
+    echo "$1"
+    echo "${YELLOW}############################################################################${RESET}"
+    echo
+}
+
+log_error() {
+    echo
+    echo "${RED}############################################################################${RESET}"
+    echo "$1"
+    echo "${RED}############################################################################${RESET}"
+    echo
+}
+
+log_success() {
+    echo
+    echo "${GREEN}############################################################################${RESET}"
+    echo "$1"
+    echo "${GREEN}############################################################################${RESET}"
+    echo
+}
+
+#####################################################################
+# Error handling
+#####################################################################
+on_error() {
+    local lineno="$1"
+    local cmd="$2"
+    echo
+    echo "${RED}ERROR on line ${lineno}: ${cmd}${RESET}"
+    echo
+    sleep 10
+}
+
+trap 'on_error "$LINENO" "$BASH_COMMAND"' ERR
+
+#####################################################################
+# Functions
+#####################################################################
+check_requirements() {
+    if ! command -v python3 >/dev/null 2>&1; then
+        log_error "python3 not found. Install it with: sudo pacman -S python"
+        exit 1
+    fi
+    if [[ ! -f "${APP}" ]]; then
+        log_error "${APP} not found. Reinstall with: sudo pacman -S kiro-gdrive"
+        exit 1
+    fi
+}
+
+#####################################################################
+# Main
+#####################################################################
+main() {
+    check_requirements
+    # exec hands the process to Python, so the usual closing log_success never runs;
+    # the app prints its own results.
+    exec python3 "${APP}" "$@"
+}
+
+main "$@"

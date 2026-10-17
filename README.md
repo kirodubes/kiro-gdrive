@@ -21,6 +21,11 @@ rclone setup.
   it only when you want.
 - **Sign out cleanly.** Signing out unmounts every share, deletes the stored token and revokes it at Google.
 
+- **Tells you when something new arrives.** Once a day it checks every share. If new files showed up, you get a
+  [kiro-news](https://github.com/kirodubes/kiro-news) notification such as "New in Niri-noctalia:
+  kirotux-niri-premium-26.10-14-any.pkg.tar.zst", and clicking it opens the folder. The first check of a new share
+  only takes stock, so you aren't flooded with everything already in it. Run it by hand with `kgd check`.
+
 Only folders can be mounted, not single files. The Google account you sign in with must be able to open the link,
 which holds for any "Anyone with the link" share.
 

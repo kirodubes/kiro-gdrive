@@ -58,6 +58,9 @@ def build_parser():
     p = sub.add_parser("status", help="account, client and shares")
     p.set_defaults(func=_cmd_status)
 
+    p = sub.add_parser("check", help="look for new files in every share and post them to kiro-news (runs daily)")
+    p.set_defaults(func=lambda _a: _report(kgd_core.check_new()))
+
     for name, func, text in (
         ("mount", kgd_core.mount, "mount a share now"),
         ("unmount", kgd_core.unmount, "unmount a share now"),

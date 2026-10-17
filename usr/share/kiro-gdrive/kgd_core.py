@@ -437,6 +437,89 @@ def remove(label):
     return Result(True, f"Removed '{label}'")
 
 
+# ── New-file feed for kiro-news ──────────────────────────────────────────
+
+CACHE_DIR = os.path.join(os.environ.get("XDG_CACHE_HOME") or os.path.expanduser("~/.cache"), "kiro-gdrive")
+SEEN_FILE = os.path.join(CACHE_DIR, "seen.json")
+# Read by kiro-news through /etc/kiro-news/sources.d/kiro-gdrive.conf.
+FEED_FILE = os.path.join(CACHE_DIR, "feed.json")
+_FEED_KEEP = 20
+# Checksum and signature files arrive alongside a release; they are listed but never headline it.
+_COMPANION_RE = re.compile(r"\.(sig|md5|sha1|sha256|sha512|pkglist\.txt)$")
+
+
+def _html(text):
+    return text.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+
+
+def _read_json(path, default):
+    try:
+        with open(path) as fh:
+            return json.load(fh)
+    except (OSError, ValueError):
+        return default
+
+
+def _write_json(path, data):
+    os.makedirs(CACHE_DIR, exist_ok=True)
+    tmp = path + ".tmp"
+    with open(tmp, "w") as fh:
+        json.dump(data, fh, indent=2)
+    os.replace(tmp, path)
+
+
+def _feed_item(label, new_paths, stamp):
+    main = [p for p in new_paths if not _COMPANION_RE.search(p)] or new_paths
+    headline = os.path.basename(main[0])
+    more = len(main) - 1
+    title = f"New in {label}: {headline}" + (f" (+{more} more)" if more else "")
+    files = "".join(f"<li>{_html(p)}</li>" for p in sorted(new_paths))
+    return {
+        "id": f"gdrive-{label}-{stamp}",
+        "title": title,
+        "url": f"file://{mount_path(label)}",
+        "date": time.strftime("%Y-%m-%d"),
+        "summary": f"<p>New in the shared Google Drive folder <strong>{_html(label)}</strong>:</p><ul>{files}</ul>",
+    }
+
+
+def check_new():
+    """Compare every share with the last check and add one kiro-news item per share that has new files."""
+    if not have_rclone() or not is_signed_in():
+        return Result(True, "Nothing to check")
+    seen = _read_json(SEEN_FILE, {})
+    feed = _read_json(FEED_FILE, {"items": []})
+    stamp = time.strftime("%Y%m%d%H%M%S")
+    reports = []
+    labels = sorted(_dump())
+    for label in labels:
+        rc, out, err = _rclone("lsjson", "-R", "--files-only", "--no-mimetype", "--fast-list", f"{label}:",
+                               timeout=300)
+        if rc != 0:
+            reports.append(f"{label}: {_rclone_error(err)}")
+            continue
+        try:
+            current = {entry["Path"]: entry.get("ModTime", "") for entry in json.loads(out)}
+        except (ValueError, KeyError):
+            reports.append(f"{label}: unreadable listing")
+            continue
+        if label not in seen:
+            # First check of a share is a silent baseline: everything in it is "old" news.
+            reports.append(f"{label}: baseline of {len(current)} files")
+        else:
+            new_paths = [path for path, mtime in current.items() if seen[label].get(path) != mtime]
+            if new_paths:
+                feed["items"].insert(0, _feed_item(label, new_paths, stamp))
+            reports.append(f"{label}: {len(new_paths)} new")
+        seen[label] = current
+    for label in [label for label in seen if label not in labels]:
+        del seen[label]
+    feed["items"] = feed["items"][:_FEED_KEEP]
+    _write_json(SEEN_FILE, seen)
+    _write_json(FEED_FILE, feed)
+    return Result(True, "; ".join(reports) or "No shares")
+
+
 def run_async(func, on_done, *args, **kwargs):
     """Run a core function in a daemon thread and call on_done(result) with its return value."""
 

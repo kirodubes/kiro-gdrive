@@ -42,6 +42,12 @@ usr/share/kiro-gdrive/
 - **`MOUNT_ROOT` in `kgd_core.py` and `%h/GoogleDrive` in the unit must match.**
 - **No `network-online.target` in the user unit**: the user manager can't see that system target.
   `Restart=on-failure` covers a login that races the network.
+- **New-file feed:** `kiro-gdrive-check.timer` (daily, enabled for every user via the
+  `etc/systemd/user/timers.target.wants/` symlink, like kiro-news) runs `kiro-gdrive check` → `check_new()`. It
+  diffs `rclone lsjson -R` against `~/.cache/kiro-gdrive/seen.json` and writes **one item per share per run** to
+  `~/.cache/kiro-gdrive/feed.json`, because kiro-news only notifies for a feed's newest item. kiro-news reads it
+  through `etc/kiro-news/sources.d/kiro-gdrive.conf` (`~/` path: needs the kiro-news version that expands `~`). A
+  share's first check is a silent baseline. Checksum and `.sig` files are listed in an item but never headline it.
 - `mount()` and `set_autostart()` run `systemctl --user daemon-reload` first, so a freshly installed unit is found
   without a re-login.
 

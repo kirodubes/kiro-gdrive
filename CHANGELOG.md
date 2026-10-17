@@ -7,6 +7,15 @@ All notable changes to kiro-gdrive are documented here. Newest first.
 ### What Changed
 - Initial package: mount shared Google Drive folders read-only from a share link, through a GTK4 window or the
   `kiro-gdrive` / `kgd` command line. A share mounts at `~/GoogleDrive/<name>` and remounts at every login.
+- **Daily "new files" notification through kiro-news.** Once a day every share is checked for new or changed
+  files; each share with news gets one kiro-news item ("New in Niri-noctalia: kirotux-niri-premium-…"), and
+  clicking it opens the folder. `kgd check` runs it by hand. Tested on the test box: baseline, a simulated new premium
+  package, and the kiro-news popup.
+  - `check_new()` diffs `rclone lsjson -R --files-only` against `~/.cache/kiro-gdrive/seen.json` and writes
+    `~/.cache/kiro-gdrive/feed.json` in kiro-news' JSON format (newest first, last 20 kept).
+  - `kiro-gdrive-check.service` and `.timer` (`OnCalendar=daily`, `Persistent=true`) are enabled for every user by
+    an `etc/systemd/user/timers.target.wants/` symlink. `etc/kiro-news/sources.d/kiro-gdrive.conf` plugs the feed
+    into kiro-news. The PKGBUILD now copies `etc/` and optdepends on kiro-news.
 - **Install rclone** button: when rclone is missing, the account row offers to install it in a visible terminal.
   The terminal shows `sudo pacman -S --needed rclone fuse3` and you type your own password there; the app itself
   never escalates.

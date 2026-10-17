@@ -1,0 +1,7 @@
+[Unit]
+Description=kiro-gdrive: look for new files in shared Google Drive folders and post them to kiro-news
+Documentation=https://github.com/kirodubes/kiro-gdrive
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/kiro-gdrive check

@@ -1,0 +1,402 @@
+# Chinese translations for kiro-gdrive package.
+# Copyright (C) 2026 THE kiro-gdrive'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the kiro-gdrive package.
+# Automatically generated, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: kiro-gdrive\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-31 13:37+0100\n"
+"PO-Revision-Date: 2026-10-31 13:37+0100\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: Chinese (simplified)\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: usr/share/kiro-gdrive/kgd_core.py:80
+msgid "unknown error"
+msgstr "未知错误"
+
+#: usr/share/kiro-gdrive/kgd_core.py:85
+msgid ""
+"Google is rate-limiting this app's OAuth client; wait a minute and try again"
+msgstr "Google 正在限制此应用的 OAuth 客户端请求；请稍等一分钟后重试"
+
+#: usr/share/kiro-gdrive/kgd_core.py:87
+msgid "the folder does not exist, or this Google account cannot open it"
+msgstr "文件夹不存在，或此 Google 账户无权打开它"
+
+#: usr/share/kiro-gdrive/kgd_core.py:95
+#, python-brace-format
+msgid "No share called “{name}”"
+msgstr "没有名为“{name}”的共享文件夹"
+
+#: usr/share/kiro-gdrive/kgd_core.py:120
+#, python-brace-format
+msgid "No terminal found; install rclone with: {command}"
+msgstr "未找到终端；请使用以下命令安装 rclone：{command}"
+
+#: usr/share/kiro-gdrive/kgd_core.py:130
+#, python-brace-format
+msgid "Could not start {program}: {error}"
+msgstr "无法启动 {program}：{error}"
+
+#: usr/share/kiro-gdrive/kgd_core.py:132
+msgid "rclone installed"
+msgstr "已安装 rclone"
+
+#: usr/share/kiro-gdrive/kgd_core.py:133
+msgid "rclone is still not installed"
+msgstr "仍未安装 rclone"
+
+#: usr/share/kiro-gdrive/kgd_core.py:153
+msgid "That is a link to a single file; only folders can be mounted"
+msgstr "这是指向单个文件的链接；只能挂载文件夹"
+
+#: usr/share/kiro-gdrive/kgd_core.py:160
+msgid "Not a Google Drive folder link"
+msgstr "这不是 Google Drive 文件夹链接"
+
+#: usr/share/kiro-gdrive/kgd_core.py:227 usr/share/kiro-gdrive/kgd_core.py:338
+msgid "rclone is not installed"
+msgstr "未安装 rclone"
+
+#: usr/share/kiro-gdrive/kgd_core.py:237
+msgid "Sign-in timed out"
+msgstr "登录超时"
+
+#: usr/share/kiro-gdrive/kgd_core.py:239
+msgid "Sign-in failed or was cancelled"
+msgstr "登录失败或已取消"
+
+#: usr/share/kiro-gdrive/kgd_core.py:243
+msgid "Could not read the token rclone returned"
+msgstr "无法读取 rclone 返回的令牌"
+
+#: usr/share/kiro-gdrive/kgd_core.py:250
+#, python-brace-format
+msgid "Google granted more than read-only access ({scopes}); token revoked"
+msgstr "Google 授予了超出只读范围的权限（{scopes}）；令牌已撤销"
+
+#: usr/share/kiro-gdrive/kgd_core.py:253
+msgid "Signed in (read-only)"
+msgstr "已登录（只读）"
+
+#: usr/share/kiro-gdrive/kgd_core.py:267
+msgid ""
+"Signed out; Google did not confirm the revoke, check Third-party connections"
+msgstr "已退出；Google 未确认撤销，请检查“第三方连接”"
+
+#: usr/share/kiro-gdrive/kgd_core.py:268
+msgid "Signed out"
+msgstr "已退出"
+
+#: usr/share/kiro-gdrive/kgd_core.py:345
+msgid "Sign in first"
+msgstr "请先登录"
+
+#: usr/share/kiro-gdrive/kgd_core.py:350
+#, python-brace-format
+msgid "A share called “{name}” already exists"
+msgstr "名为“{name}”的共享文件夹已存在"
+
+#: usr/share/kiro-gdrive/kgd_core.py:360
+#, python-brace-format
+msgid "rclone config failed: {error}"
+msgstr "rclone 配置失败：{error}"
+
+#: usr/share/kiro-gdrive/kgd_core.py:365
+#, python-brace-format
+msgid "Cannot open that folder: {error}"
+msgstr "无法打开此文件夹：{error}"
+
+#: usr/share/kiro-gdrive/kgd_core.py:377
+#, python-brace-format
+msgid "Added “{name}”, but {error}"
+msgstr "已添加“{name}”，但{error}"
+
+#: usr/share/kiro-gdrive/kgd_core.py:378
+#, python-brace-format
+msgid "Added and mounted “{name}” at {path}"
+msgstr "已添加并挂载“{name}”到 {path}"
+
+#: usr/share/kiro-gdrive/kgd_core.py:379
+#, python-brace-format
+msgid "Added “{name}”"
+msgstr "已添加“{name}”"
+
+#: usr/share/kiro-gdrive/kgd_core.py:385
+#, python-brace-format
+msgid "see journalctl --user -u {unit}"
+msgstr "请查看 journalctl --user -u {unit}"
+
+#: usr/share/kiro-gdrive/kgd_core.py:386
+#, python-brace-format
+msgid "mount failed: {reason} (it retries every 10 seconds)"
+msgstr "挂载失败：{reason}（每 10 秒重试一次）"
+
+#: usr/share/kiro-gdrive/kgd_core.py:397
+#, python-brace-format
+msgid "Mounted at {path}"
+msgstr "已挂载到 {path}"
+
+#: usr/share/kiro-gdrive/kgd_core.py:407
+#, python-brace-format
+msgid "Unmounted “{name}”"
+msgstr "已卸载“{name}”"
+
+#: usr/share/kiro-gdrive/kgd_core.py:421
+#, python-brace-format
+msgid "Mount at login off for “{name}”"
+msgstr "已关闭“{name}”的登录时自动挂载"
+
+#: usr/share/kiro-gdrive/kgd_core.py:421
+#, python-brace-format
+msgid "Mount at login on for “{name}”"
+msgstr "已开启“{name}”的登录时自动挂载"
+
+#: usr/share/kiro-gdrive/kgd_core.py:437
+#, python-brace-format
+msgid "Removed “{name}”"
+msgstr "已移除“{name}”"
+
+#: usr/share/kiro-gdrive/kgd_core.py:475
+#, python-brace-format
+msgid "New in {name}: {file} (+{count} more)"
+msgid_plural "New in {name}: {file} (+{count} more)"
+msgstr[0] "“{name}”中有新内容：{file}（另有 {count} 个）"
+
+#: usr/share/kiro-gdrive/kgd_core.py:476
+#, python-brace-format
+msgid "New in {name}: {file}"
+msgstr "“{name}”中有新内容：{file}"
+
+#: usr/share/kiro-gdrive/kgd_core.py:484
+#, python-brace-format
+msgid "New in the shared Google Drive folder <strong>{name}</strong>:"
+msgstr "共享的 Google Drive 文件夹 <strong>{name}</strong> 中有新内容："
+
+#: usr/share/kiro-gdrive/kgd_gui.py:20
+msgid ""
+"A shared Google Drive folder normally only opens in a web browser. KiroTux "
+"Drive puts it in your home folder instead, so you can open, copy and play "
+"its files from your file manager like any other folder."
+msgstr ""
+"共享的 Google Drive 文件夹通常只能在网页浏览器中打开。KiroTux Drive 会将它挂"
+"载到你的主文件夹中，这样你就可以像使用其他文件夹一样，在文件管理器中打开、复"
+"制和播放其中的文件。"
+
+#: usr/share/kiro-gdrive/kgd_gui.py:25
+msgid ""
+"<b>Why do I need to sign in?</b>\n"
+"Google only lets programs read Drive files on behalf of a Google account, "
+"even for folders shared with “anyone with the link”. Any Google account that "
+"can open the link will do.\n"
+"\n"
+"<b>Why does a browser open?</b>\n"
+"You sign in on Google's own page, so this app never sees your password. "
+"Choose your account and click <i>Allow</i>; Google then hands this app a key "
+"that can only read files.\n"
+"\n"
+"<b>What can it do with that access?</b>\n"
+"Only look and download. It cannot change, upload or delete anything on your "
+"Drive. Google describes this as “See and download all your Google Drive "
+"files”, but the app only opens the folders you add here. Nothing is sent "
+"anywhere else: files go straight from Google to your computer.\n"
+"\n"
+"<b>Could someone turn it into write access?</b>\n"
+"No. Read-only is part of the key itself, and Google enforces it on its own "
+"servers, so changing this app cannot upgrade the key. Write access would "
+"need a new sign-in in which Google plainly asks to “see, edit, create and "
+"delete” your files, and you would have to click <i>Allow</i> yourself.\n"
+"\n"
+"<b>“Google hasn't verified this app”?</b>\n"
+"Google shows this warning for small apps until they finish its review. Click "
+"<i>Advanced</i>, then <i>Go to</i> the app to continue.\n"
+"\n"
+"<b>Where is the key kept?</b>\n"
+"In <tt>~/.config/kiro-gdrive/</tt>, readable only by you. <i>Sign out</i> "
+"deletes it and tells Google to cancel it. You can also remove access at any "
+"time under Google Account → Security → Third-party connections."
+msgstr ""
+"<b>为什么需要登录？</b>\n"
+"即使文件夹是“知道链接的任何人”都可以访问，Google 也只允许程序代表 Google 账户"
+"读取 Drive 文件。任何能够打开此链接的 Google 账户都可以。\n"
+"\n"
+"<b>为什么会打开浏览器？</b>\n"
+"你会在 Google 自己的页面上登录，因此此应用不会获取你的密码。选择你的账户，然"
+"后点击<i>允许</i>；随后 Google 会向此应用提供一个只能读取文件的密钥。\n"
+"\n"
+"<b>此应用可以用这些权限做什么？</b>\n"
+"只能查看和下载。它无法更改、上传或删除你 Drive 中的任何内容。Google 将此权限"
+"描述为“查看和下载你的所有 Google Drive 文件”，但此应用只会打开你在这里添加的"
+"文件夹。内容不会发送到其他地方：文件会直接从 Google 传输到你的电脑。\n"
+"\n"
+"<b>有人能把它改成写入权限吗？</b>\n"
+"不能。只读权限由密钥本身限定，并由 Google 在其服务器上强制执行，因此修改此应"
+"用也无法提升密钥权限。要获得写入权限，必须重新登录，并由 Google 明确询问是否“"
+"查看、编辑、创建和删除”你的文件；而且你必须亲自点击<i>允许</i>。\n"
+"\n"
+"<b>“Google 尚未验证此应用”？</b>\n"
+"小型应用在完成 Google 的审核前会显示此警告。点击<i>高级</i>，然后点击<i>转"
+"到</i>该应用以继续。\n"
+"\n"
+"<b>密钥存在哪里？</b>\n"
+"它保存在 <tt>~/.config/kiro-gdrive/</tt> 中，只有你能读取。<i>退出</i>会删除"
+"密钥并通知 Google 撤销它。你也可以随时前往 Google 账号 → 安全性 → 第三方连接"
+"，移除访问权限。"
+
+#: usr/share/kiro-gdrive/kgd_gui.py:53 po/kiro-gdrive.desktop.in:2
+msgid "KiroTux Drive"
+msgstr "KiroTux Drive"
+
+#: usr/share/kiro-gdrive/kgd_gui.py:77
+msgid "Refresh"
+msgstr "刷新"
+
+#: usr/share/kiro-gdrive/kgd_gui.py:81
+msgid "Restart now"
+msgstr "立即重启"
+
+#: usr/share/kiro-gdrive/kgd_gui.py:95
+msgid "Why sign in, and why does a browser open?"
+msgstr "为什么要登录？为什么会打开浏览器？"
+
+#: usr/share/kiro-gdrive/kgd_gui.py:111
+msgid "Paste a Google Drive folder link"
+msgstr "粘贴 Google Drive 文件夹链接"
+
+#: usr/share/kiro-gdrive/kgd_gui.py:113
+msgid "Name (optional)"
+msgstr "名称（可选）"
+
+#: usr/share/kiro-gdrive/kgd_gui.py:115
+msgid "Add and mount"
+msgstr "添加并挂载"
+
+#: usr/share/kiro-gdrive/kgd_gui.py:129
+msgid "No shares yet. Paste a folder link above."
+msgstr "还没有共享文件夹。请在上方粘贴文件夹链接。"
+
+#: usr/share/kiro-gdrive/kgd_gui.py:136
+#, python-brace-format
+msgid "Shares mount read-only under {path}"
+msgstr "共享文件夹将以只读方式挂载到 {path} 下"
+
+#: usr/share/kiro-gdrive/kgd_gui.py:144 usr/share/kiro-gdrive/kgd_gui.py:161
+msgid "Mounted"
+msgstr "已挂载"
+
+#: usr/share/kiro-gdrive/kgd_gui.py:144
+msgid "Not mounted"
+msgstr "未挂载"
+
+#: usr/share/kiro-gdrive/kgd_gui.py:156
+msgid "At login"
+msgstr "登录时"
+
+#: usr/share/kiro-gdrive/kgd_gui.py:166
+msgid "Open folder"
+msgstr "打开文件夹"
+
+#: usr/share/kiro-gdrive/kgd_gui.py:173
+msgid "Unmount and forget (nothing is deleted on Google Drive)"
+msgstr "卸载并移除（不会删除 Google Drive 中的任何内容）"
+
+#: usr/share/kiro-gdrive/kgd_gui.py:182
+#, python-brace-format
+msgid "System ({language})"
+msgstr "系统（{language}）"
+
+#: usr/share/kiro-gdrive/kgd_gui.py:185
+msgid "Language"
+msgstr "语言"
+
+#: usr/share/kiro-gdrive/kgd_gui.py:214
+msgid ""
+"rclone is needed to mount Google Drive folders, and it is not installed."
+msgstr "挂载 Google Drive 文件夹需要 rclone，但尚未安装。"
+
+#: usr/share/kiro-gdrive/kgd_gui.py:215
+msgid "Install rclone"
+msgstr "安装 rclone"
+
+#: usr/share/kiro-gdrive/kgd_gui.py:217
+msgid "Signed in to Google (read-only access)"
+msgstr "已登录 Google（只读权限）"
+
+#: usr/share/kiro-gdrive/kgd_gui.py:218
+msgid "Sign out"
+msgstr "退出"
+
+#: usr/share/kiro-gdrive/kgd_gui.py:220
+msgid ""
+"Not signed in. Sign in once with the Google account that can open the links."
+msgstr "尚未登录。请使用能够打开这些链接的 Google 账户登录一次。"
+
+#: usr/share/kiro-gdrive/kgd_gui.py:221
+msgid "Sign in with Google"
+msgstr "使用 Google 账户登录"
+
+#: usr/share/kiro-gdrive/kgd_gui.py:264
+msgid "Saved. KiroTux Drive shows the new language when it starts again."
+msgstr "已保存。KiroTux Drive 下次启动时会显示新语言。"
+
+#: usr/share/kiro-gdrive/kgd_gui.py:276
+msgid "Installing rclone: type your password in the terminal window…"
+msgstr "正在安装 rclone：请在终端窗口中输入你的密码…"
+
+#: usr/share/kiro-gdrive/kgd_gui.py:278
+msgid "Signing out and unmounting all shares…"
+msgstr "正在退出并卸载所有共享文件夹…"
+
+#: usr/share/kiro-gdrive/kgd_gui.py:280
+msgid ""
+"Your browser now shows Google's sign-in page. Choose your account, click "
+"Allow, then come back here (this window waits up to 10 minutes)…"
+msgstr ""
+"浏览器中已打开 Google 的登录页面。请选择你的账户，点击“允许”，然后返回此处（"
+"此窗口最多等待 10 分钟）…"
+
+#: usr/share/kiro-gdrive/kgd_gui.py:286
+msgid "Paste a Google Drive folder link first"
+msgstr "请先粘贴 Google Drive 文件夹链接"
+
+#: usr/share/kiro-gdrive/kgd_gui.py:293
+msgid "Checking the folder and mounting it…"
+msgstr "正在检查文件夹并挂载…"
+
+#: usr/share/kiro-gdrive/kgd_gui.py:298
+#, python-brace-format
+msgid "Mounting “{name}”…"
+msgstr "正在挂载“{name}”…"
+
+#: usr/share/kiro-gdrive/kgd_gui.py:300
+#, python-brace-format
+msgid "Unmounting “{name}”…"
+msgstr "正在卸载“{name}”…"
+
+#: usr/share/kiro-gdrive/kgd_gui.py:305
+msgid "Updating mount at login…"
+msgstr "正在更新登录时自动挂载设置…"
+
+#: usr/share/kiro-gdrive/kgd_gui.py:311
+#, python-brace-format
+msgid "Removing “{name}”…"
+msgstr "正在移除“{name}”…"
+
+#: po/kiro-gdrive.desktop.in:3
+msgid "Google Drive Folder Mounter"
+msgstr "Google Drive 文件夹挂载器"
+
+#: po/kiro-gdrive.desktop.in:4
+msgid "Mount shared Google Drive folders read-only in your home folder"
+msgstr "以只读方式将共享的 Google Drive 文件夹挂载到你的主文件夹"
+
+#: po/kiro-gdrive.desktop.in:10
+msgid "google;drive;gdrive;mount;rclone;share;cloud"
+msgstr "google;drive;gdrive;挂载;rclone;共享;云端"

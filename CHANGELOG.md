@@ -2,6 +2,35 @@
 
 All notable changes to kiro-gdrive are documented here. Newest first.
 
+## 2026.10.31
+
+### What Changed
+- **KiroTux Drive speaks 13 languages**: Dutch, German, Spanish, French, Portuguese (Brazil), Russian, Hungarian,
+  Italian, Turkish, Polish, Japanese, Chinese (simplified) and Romanian, besides English. It follows the system
+  language (Portugal reads Brazilian Portuguese, Taiwan/Hong Kong simplified Chinese).
+- **Language dropdown** at the top of the window, with **Restart now**, to pick another language.
+- The messages, the menu entry and the daily new-file notifications are translated too; the command line's help text
+  and its `list` columns stay English.
+
+### Technical Details
+- New `kgd_i18n.py`, a copy of the KIROTUX premium apps' i18n module (domain `kiro-gdrive`, catalogs in
+  `usr/share/locale`, sibling fallback pt→pt_BR, zh→zh_CN). The choice lives in `~/.config/kiro-gdrive/prefs.json`;
+  `KGD_LANGUAGE` beats it and the system language. Toolkit-free, so the CLI and the `check` timer use it too.
+- 72 strings in `_()`: whole sentences with named placeholders ("Mounted “{name}”…"), the feed title with `ngettext`;
+  the `check` reports for the journal and `rclone`/`systemd` output stay English.
+- `po/`: template, 13 `.po` files, `make-mo.sh` (also writes the menu entry from `po/kiro-gdrive.desktop.in`),
+  `.codespellrc` skips the generated `.desktop` and the catalogs.
+- Translations drafted by GitHub Copilot (GPT-6 Luna) and reviewed by a second AI (Luna; GPT-6.1 Terra for Russian,
+  Hungarian, Turkish, Polish, Japanese, Chinese and Romanian): 43 findings, 39 taken. The Google account path in the
+  sign-in help ("Google Account → Security → Third-party connections") uses the names Google shows in each language.
+  Every language's window checked off-screen.
+
+### Files Modified
+- `usr/share/kiro-gdrive/kgd_i18n.py` (new), `kgd_gui.py` (language dropdown), `kgd_core.py`
+- `po/` (new), `usr/share/locale/*/LC_MESSAGES/kiro-gdrive.mo` (new), `usr/share/applications/kiro-gdrive.desktop`
+  (now generated), `.codespellrc` (new)
+- `README.md`, `CLAUDE.md`, `CHANGELOG.md`
+
 ## 2026.10.17
 
 ### What Changed

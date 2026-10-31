@@ -13,6 +13,7 @@ import urllib.parse
 import urllib.request
 
 import log
+from kgd_i18n import _, ngettext
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 CONFIG_DIR = os.path.join(os.environ.get("XDG_CONFIG_HOME") or os.path.expanduser("~/.config"), "kiro-gdrive")
@@ -76,17 +77,14 @@ def _unit(label):
 
 def _last_line(text):
     lines = [line for line in text.strip().splitlines() if line.strip()]
-    return lines[-1] if lines else "unknown error"
-
-
-_RATE_LIMITED = "Google is rate-limiting this app's OAuth client; wait a minute and try again"
+    return lines[-1] if lines else _("unknown error")
 
 
 def _rclone_error(text):
     if "rateLimitExceeded" in text or "userRateLimitExceeded" in text:
-        return _RATE_LIMITED
+        return _("Google is rate-limiting this app's OAuth client; wait a minute and try again")
     if "notFound" in text or "Error 404" in text:
-        return "the folder does not exist, or this Google account cannot open it"
+        return _("the folder does not exist, or this Google account cannot open it")
     # Drop rclone's "2026/10/17 08:26:26 NOTICE: " log prefix.
     return re.sub(r"^\d{4}/\d\d/\d\d \d\d:\d\d:\d\d \w+\s*:\s*", "", _last_line(text))
 
@@ -94,7 +92,7 @@ def _rclone_error(text):
 def _unknown(label):
     if label in _dump():
         return None
-    return Result(False, f"No share called '{label}'")
+    return Result(False, _("No share called “{name}”").format(name=label))
 
 
 def _ensure_config_dir():
@@ -119,7 +117,7 @@ def install_rclone():
     """Install rclone in a visible terminal, where the user sees the command and types the sudo password."""
     term = next((t for t in _TERMINALS if shutil.which(t)), None)
     if term is None:
-        return Result(False, f"No terminal found; install rclone with: {_INSTALL_COMMAND}")
+        return Result(False, _("No terminal found; install rclone with: {command}").format(command=_INSTALL_COMMAND))
     script = (
         'echo "KiroTux Drive is running this command on your system:"; echo; '
         f'echo "    {_INSTALL_COMMAND}"; echo; '
@@ -129,10 +127,10 @@ def install_rclone():
     try:
         subprocess.run([term, "-e", "bash", "-c", script], timeout=1800)
     except (OSError, subprocess.SubprocessError) as err:
-        return Result(False, f"Could not start {term}: {err}")
+        return Result(False, _("Could not start {program}: {error}").format(program=term, error=err))
     if have_rclone():
-        return Result(True, "rclone installed")
-    return Result(False, "rclone is still not installed")
+        return Result(True, _("rclone installed"))
+    return Result(False, _("rclone is still not installed"))
 
 
 def load_client():
@@ -152,14 +150,14 @@ def parse_link(text):
     """Return the folder ID from a Drive folder link or bare ID; raise ValueError otherwise."""
     text = text.strip()
     if "/file/d/" in text:
-        raise ValueError("That is a link to a single file; only folders can be mounted")
+        raise ValueError(_("That is a link to a single file; only folders can be mounted"))
     for regex in (_FOLDER_RE, _ID_PARAM_RE):
         match = regex.search(text)
         if match:
             return match.group(1)
     if _BARE_ID_RE.match(text):
         return text
-    raise ValueError("Not a Google Drive folder link")
+    raise ValueError(_("Not a Google Drive folder link"))
 
 
 def clean_label(text):
@@ -226,7 +224,7 @@ def _revoke(token):
 def login(no_browser=False):
     """Sign in to Google through rclone and store a read-only token."""
     if not have_rclone():
-        return Result(False, "rclone is not installed")
+        return Result(False, _("rclone is not installed"))
     cmd = ["rclone", "authorize", "drive"]
     cmd += [arg for arg in load_client() if arg]
     cmd += ["--drive-scope", SCOPE]
@@ -236,22 +234,23 @@ def login(no_browser=False):
     try:
         proc = subprocess.run(cmd, stdout=subprocess.PIPE, text=True, timeout=600)
     except subprocess.TimeoutExpired:
-        return Result(False, "Sign-in timed out")
+        return Result(False, _("Sign-in timed out"))
     if proc.returncode != 0:
-        return Result(False, "Sign-in failed or was cancelled")
+        return Result(False, _("Sign-in failed or was cancelled"))
     try:
         token = _extract_token(proc.stdout)
     except (ValueError, KeyError):
-        return Result(False, "Could not read the token rclone returned")
+        return Result(False, _("Could not read the token rclone returned"))
     try:
         scopes = _granted_scopes(token)
     except Exception:
         scopes = set()
     if scopes and scopes != {_SCOPE_URL}:
         _revoke(token)
-        return Result(False, f"Google granted more than read-only access ({' '.join(sorted(scopes))}); token revoked")
+        return Result(False, _("Google granted more than read-only access ({scopes}); token revoked").format(
+            scopes=" ".join(sorted(scopes))))
     _save_token(token)
-    return Result(True, "Signed in (read-only)")
+    return Result(True, _("Signed in (read-only)"))
 
 
 def logout():
@@ -265,8 +264,8 @@ def logout():
     except FileNotFoundError:
         pass
     if token and not revoked:
-        return Result(True, "Signed out; Google did not confirm the revoke, check Third-party connections")
-    return Result(True, "Signed out")
+        return Result(True, _("Signed out; Google did not confirm the revoke, check Third-party connections"))
+    return Result(True, _("Signed out"))
 
 
 # ── Shares ───────────────────────────────────────────────────────────────
@@ -336,19 +335,19 @@ def list_shares():
 def add(link, label="", mount=True):
     """Configure a share from a Drive link and (by default) mount it now and at every login."""
     if not have_rclone():
-        return Result(False, "rclone is not installed")
+        return Result(False, _("rclone is not installed"))
     try:
         folder_id = parse_link(link)
     except ValueError as err:
         return Result(False, str(err))
     token = _load_token()
     if not token:
-        return Result(False, "Sign in first")
+        return Result(False, _("Sign in first"))
     existing = _dump()
     wanted = clean_label(label)
     temp = wanted or f"share-{folder_id[:8]}"
     if temp in existing:
-        return Result(False, f"A share called '{temp}' already exists")
+        return Result(False, _("A share called “{name}” already exists").format(name=temp))
 
     _ensure_config_dir()
     args = ["config", "create", temp, "drive", "scope", SCOPE, "root_folder_id", folder_id, "token", token]
@@ -358,12 +357,12 @@ def add(link, label="", mount=True):
     args += ["config_refresh_token=false", "--non-interactive"]
     rc, _out, err = _rclone(*args)
     if rc != 0:
-        return Result(False, f"rclone config failed: {_rclone_error(err)}")
+        return Result(False, _("rclone config failed: {error}").format(error=_rclone_error(err)))
 
     rc, _out, err = _rclone("lsf", "--max-depth", "1", f"{temp}:", timeout=120)
     if rc != 0:
         _rclone("config", "delete", temp)
-        return Result(False, f"Cannot open that folder: {_rclone_error(err)}")
+        return Result(False, _("Cannot open that folder: {error}").format(error=_rclone_error(err)))
 
     final = temp
     if not wanted:
@@ -375,16 +374,16 @@ def add(link, label="", mount=True):
     if mount:
         result = set_autostart(final, True, now=True)
         if not result.ok:
-            return Result(False, f"Added '{final}', but {result.message}")
-        return Result(True, f"Added and mounted '{final}' at {mount_path(final)}")
-    return Result(True, f"Added '{final}'")
+            return Result(False, _("Added “{name}”, but {error}").format(name=final, error=result.message))
+        return Result(True, _("Added and mounted “{name}” at {path}").format(name=final, path=mount_path(final)))
+    return Result(True, _("Added “{name}”").format(name=final))
 
 
 def _start_failure(label):
     # systemctl only says "see journalctl"; the useful reason is the unit's last log line.
     _rc, out, _err = _run(["journalctl", "--user", "-u", _unit(label), "-n", "1", "-o", "cat", "--no-pager"], 10)
-    reason = _rclone_error(out) if out.strip() else "see journalctl --user -u " + _unit(label)
-    return f"mount failed: {reason} (it retries every 10 seconds)"
+    reason = _rclone_error(out) if out.strip() else _("see journalctl --user -u {unit}").format(unit=_unit(label))
+    return _("mount failed: {reason} (it retries every 10 seconds)").format(reason=reason)
 
 
 def mount(label):
@@ -395,7 +394,7 @@ def mount(label):
     rc, _out, _err = _systemctl("start", _unit(label))
     if rc != 0:
         return Result(False, _start_failure(label))
-    return Result(True, f"Mounted at {mount_path(label)}")
+    return Result(True, _("Mounted at {path}").format(path=mount_path(label)))
 
 
 def unmount(label):
@@ -405,7 +404,7 @@ def unmount(label):
     rc, _out, err = _systemctl("stop", _unit(label))
     if rc != 0:
         return Result(False, _last_line(err))
-    return Result(True, f"Unmounted '{label}'")
+    return Result(True, _("Unmounted “{name}”").format(name=label))
 
 
 def set_autostart(label, enabled, now=False):
@@ -419,7 +418,8 @@ def set_autostart(label, enabled, now=False):
     rc, _out, err = _systemctl(*args, _unit(label))
     if rc != 0:
         return Result(False, _start_failure(label) if enabled and now else _last_line(err))
-    return Result(True, f"Mount at login {'on' if enabled else 'off'} for '{label}'")
+    return Result(True, (_("Mount at login on for “{name}”") if enabled else _("Mount at login off for “{name}”")).format(
+        name=label))
 
 
 def remove(label):
@@ -434,7 +434,7 @@ def remove(label):
         os.rmdir(mount_path(label))
     except OSError:
         pass
-    return Result(True, f"Removed '{label}'")
+    return Result(True, _("Removed “{name}”").format(name=label))
 
 
 # ── New-file feed for kiro-news ──────────────────────────────────────────
@@ -472,14 +472,16 @@ def _feed_item(label, new_paths, stamp):
     main = [p for p in new_paths if not _COMPANION_RE.search(p)] or new_paths
     headline = os.path.basename(main[0])
     more = len(main) - 1
-    title = f"New in {label}: {headline}" + (f" (+{more} more)" if more else "")
+    title = (ngettext("New in {name}: {file} (+{count} more)", "New in {name}: {file} (+{count} more)", more)
+             if more else _("New in {name}: {file}")).format(name=label, file=headline, count=more)
     files = "".join(f"<li>{_html(p)}</li>" for p in sorted(new_paths))
     return {
         "id": f"gdrive-{label}-{stamp}",
         "title": title,
         "url": f"file://{mount_path(label)}",
         "date": time.strftime("%Y-%m-%d"),
-        "summary": f"<p>New in the shared Google Drive folder <strong>{_html(label)}</strong>:</p><ul>{files}</ul>",
+        "summary": "<p>{}</p><ul>{}</ul>".format(
+            _("New in the shared Google Drive folder <strong>{name}</strong>:").format(name=_html(label)), files),
     }
 
 

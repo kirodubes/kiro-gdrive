@@ -1,0 +1,435 @@
+# French translations for kiro-gdrive package.
+# Copyright (C) 2026 THE kiro-gdrive'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the kiro-gdrive package.
+# Automatically generated, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: kiro-gdrive\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-31 13:37+0100\n"
+"PO-Revision-Date: 2026-10-31 13:37+0100\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: French\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: usr/share/kiro-gdrive/kgd_core.py:80
+msgid "unknown error"
+msgstr "erreur inconnue"
+
+#: usr/share/kiro-gdrive/kgd_core.py:85
+msgid ""
+"Google is rate-limiting this app's OAuth client; wait a minute and try again"
+msgstr ""
+"Google limite les requêtes de ce client OAuth de l’appli ; attendez une "
+"minute et réessayez"
+
+#: usr/share/kiro-gdrive/kgd_core.py:87
+msgid "the folder does not exist, or this Google account cannot open it"
+msgstr "le dossier n’existe pas, ou ce compte Google ne peut pas l’ouvrir"
+
+#: usr/share/kiro-gdrive/kgd_core.py:95
+#, python-brace-format
+msgid "No share called “{name}”"
+msgstr "Aucun partage appelé « {name} »"
+
+#: usr/share/kiro-gdrive/kgd_core.py:120
+#, python-brace-format
+msgid "No terminal found; install rclone with: {command}"
+msgstr "Aucun terminal trouvé ; installez rclone avec : {command}"
+
+#: usr/share/kiro-gdrive/kgd_core.py:130
+#, python-brace-format
+msgid "Could not start {program}: {error}"
+msgstr "Impossible de démarrer {program} : {error}"
+
+#: usr/share/kiro-gdrive/kgd_core.py:132
+msgid "rclone installed"
+msgstr "rclone est installé"
+
+#: usr/share/kiro-gdrive/kgd_core.py:133
+msgid "rclone is still not installed"
+msgstr "rclone n’est toujours pas installé"
+
+#: usr/share/kiro-gdrive/kgd_core.py:153
+msgid "That is a link to a single file; only folders can be mounted"
+msgstr ""
+"Ce lien mène à un fichier unique ; seuls les dossiers peuvent être montés"
+
+#: usr/share/kiro-gdrive/kgd_core.py:160
+msgid "Not a Google Drive folder link"
+msgstr "Ce n’est pas un lien vers un dossier Google Drive"
+
+#: usr/share/kiro-gdrive/kgd_core.py:227 usr/share/kiro-gdrive/kgd_core.py:338
+msgid "rclone is not installed"
+msgstr "rclone n’est pas installé"
+
+#: usr/share/kiro-gdrive/kgd_core.py:237
+msgid "Sign-in timed out"
+msgstr "Délai de connexion dépassé"
+
+#: usr/share/kiro-gdrive/kgd_core.py:239
+msgid "Sign-in failed or was cancelled"
+msgstr "Échec de la connexion ou connexion annulée"
+
+#: usr/share/kiro-gdrive/kgd_core.py:243
+msgid "Could not read the token rclone returned"
+msgstr "Impossible de lire le jeton renvoyé par rclone"
+
+#: usr/share/kiro-gdrive/kgd_core.py:250
+#, python-brace-format
+msgid "Google granted more than read-only access ({scopes}); token revoked"
+msgstr ""
+"Google a accordé un accès supérieur à la lecture seule ({scopes}) ; jeton "
+"révoqué"
+
+#: usr/share/kiro-gdrive/kgd_core.py:253
+msgid "Signed in (read-only)"
+msgstr "Connexion établie (lecture seule)"
+
+#: usr/share/kiro-gdrive/kgd_core.py:267
+msgid ""
+"Signed out; Google did not confirm the revoke, check Third-party connections"
+msgstr ""
+"Déconnexion effectuée ; Google n’a pas confirmé la révocation. Vérifiez les "
+"connexions tierces"
+
+#: usr/share/kiro-gdrive/kgd_core.py:268
+msgid "Signed out"
+msgstr "Déconnexion effectuée"
+
+#: usr/share/kiro-gdrive/kgd_core.py:345
+msgid "Sign in first"
+msgstr "Connectez-vous d’abord"
+
+#: usr/share/kiro-gdrive/kgd_core.py:350
+#, python-brace-format
+msgid "A share called “{name}” already exists"
+msgstr "Un partage appelé « {name} » existe déjà"
+
+#: usr/share/kiro-gdrive/kgd_core.py:360
+#, python-brace-format
+msgid "rclone config failed: {error}"
+msgstr "Échec de la configuration de rclone : {error}"
+
+#: usr/share/kiro-gdrive/kgd_core.py:365
+#, python-brace-format
+msgid "Cannot open that folder: {error}"
+msgstr "Impossible d’ouvrir ce dossier : {error}"
+
+#: usr/share/kiro-gdrive/kgd_core.py:377
+#, python-brace-format
+msgid "Added “{name}”, but {error}"
+msgstr "« {name} » a été ajouté, mais {error}"
+
+#: usr/share/kiro-gdrive/kgd_core.py:378
+#, python-brace-format
+msgid "Added and mounted “{name}” at {path}"
+msgstr "« {name} » a été ajouté et monté dans {path}"
+
+#: usr/share/kiro-gdrive/kgd_core.py:379
+#, python-brace-format
+msgid "Added “{name}”"
+msgstr "« {name} » a été ajouté"
+
+#: usr/share/kiro-gdrive/kgd_core.py:385
+#, python-brace-format
+msgid "see journalctl --user -u {unit}"
+msgstr "consultez journalctl --user -u {unit}"
+
+#: usr/share/kiro-gdrive/kgd_core.py:386
+#, python-brace-format
+msgid "mount failed: {reason} (it retries every 10 seconds)"
+msgstr "Échec du montage : {reason} (nouvelle tentative toutes les 10 secondes)"
+
+#: usr/share/kiro-gdrive/kgd_core.py:397
+#, python-brace-format
+msgid "Mounted at {path}"
+msgstr "Monté dans {path}"
+
+#: usr/share/kiro-gdrive/kgd_core.py:407
+#, python-brace-format
+msgid "Unmounted “{name}”"
+msgstr "« {name} » a été démonté"
+
+#: usr/share/kiro-gdrive/kgd_core.py:421
+#, python-brace-format
+msgid "Mount at login off for “{name}”"
+msgstr "Montage à la connexion désactivé pour « {name} »"
+
+#: usr/share/kiro-gdrive/kgd_core.py:421
+#, python-brace-format
+msgid "Mount at login on for “{name}”"
+msgstr "Montage à la connexion activé pour « {name} »"
+
+#: usr/share/kiro-gdrive/kgd_core.py:437
+#, python-brace-format
+msgid "Removed “{name}”"
+msgstr "« {name} » a été supprimé"
+
+#: usr/share/kiro-gdrive/kgd_core.py:475
+#, python-brace-format
+msgid "New in {name}: {file} (+{count} more)"
+msgid_plural "New in {name}: {file} (+{count} more)"
+msgstr[0] "Nouveauté dans {name} : {file} (+{count} autre)"
+msgstr[1] "Nouveautés dans {name} : {file} (+{count} autres)"
+
+#: usr/share/kiro-gdrive/kgd_core.py:476
+#, python-brace-format
+msgid "New in {name}: {file}"
+msgstr "Nouveauté dans {name} : {file}"
+
+#: usr/share/kiro-gdrive/kgd_core.py:484
+#, python-brace-format
+msgid "New in the shared Google Drive folder <strong>{name}</strong>:"
+msgstr ""
+"Nouveau fichier dans le dossier Google Drive partagé <strong>{name}</strong> "
+":"
+
+#: usr/share/kiro-gdrive/kgd_gui.py:20
+msgid ""
+"A shared Google Drive folder normally only opens in a web browser. KiroTux "
+"Drive puts it in your home folder instead, so you can open, copy and play "
+"its files from your file manager like any other folder."
+msgstr ""
+"Un dossier Google Drive partagé ne s’ouvre normalement que dans un "
+"navigateur. KiroTux Drive le place plutôt dans votre dossier personnel, afin "
+"que vous puissiez ouvrir, copier et lire ses fichiers depuis votre "
+"gestionnaire de fichiers, comme dans n’importe quel autre dossier."
+
+#: usr/share/kiro-gdrive/kgd_gui.py:25
+msgid ""
+"<b>Why do I need to sign in?</b>\n"
+"Google only lets programs read Drive files on behalf of a Google account, "
+"even for folders shared with “anyone with the link”. Any Google account that "
+"can open the link will do.\n"
+"\n"
+"<b>Why does a browser open?</b>\n"
+"You sign in on Google's own page, so this app never sees your password. "
+"Choose your account and click <i>Allow</i>; Google then hands this app a key "
+"that can only read files.\n"
+"\n"
+"<b>What can it do with that access?</b>\n"
+"Only look and download. It cannot change, upload or delete anything on your "
+"Drive. Google describes this as “See and download all your Google Drive "
+"files”, but the app only opens the folders you add here. Nothing is sent "
+"anywhere else: files go straight from Google to your computer.\n"
+"\n"
+"<b>Could someone turn it into write access?</b>\n"
+"No. Read-only is part of the key itself, and Google enforces it on its own "
+"servers, so changing this app cannot upgrade the key. Write access would "
+"need a new sign-in in which Google plainly asks to “see, edit, create and "
+"delete” your files, and you would have to click <i>Allow</i> yourself.\n"
+"\n"
+"<b>“Google hasn't verified this app”?</b>\n"
+"Google shows this warning for small apps until they finish its review. Click "
+"<i>Advanced</i>, then <i>Go to</i> the app to continue.\n"
+"\n"
+"<b>Where is the key kept?</b>\n"
+"In <tt>~/.config/kiro-gdrive/</tt>, readable only by you. <i>Sign out</i> "
+"deletes it and tells Google to cancel it. You can also remove access at any "
+"time under Google Account → Security → Third-party connections."
+msgstr ""
+"<b>Pourquoi dois-je me connecter ?</b>\n"
+"Google n’autorise les programmes à lire les fichiers Drive qu’au nom d’un "
+"compte Google, même pour les dossiers partagés avec « toute personne "
+"disposant du lien ». N’importe quel compte Google pouvant ouvrir le lien "
+"convient.\n"
+"\n"
+"<b>Pourquoi un navigateur s’ouvre-t-il ?</b>\n"
+"Vous vous connectez sur la page officielle de Google : cette appli ne voit "
+"donc jamais votre mot de passe. Choisissez votre compte et cliquez sur <i>"
+"Autoriser</i> ; Google remet ensuite à cette appli une clé qui permet "
+"uniquement de lire les fichiers.\n"
+"\n"
+"<b>Que peut faire l’appli avec cet accès ?</b>\n"
+"Elle peut uniquement consulter et télécharger les fichiers. Elle ne peut "
+"rien modifier, téléverser ni supprimer dans votre Drive. Google décrit cet "
+"accès comme « Voir et télécharger tous vos fichiers Google Drive », mais "
+"l’appli n’ouvre que les dossiers que vous ajoutez ici. Rien n’est envoyé "
+"ailleurs : les fichiers sont transférés directement de Google à votre "
+"ordinateur.\n"
+"\n"
+"<b>Quelqu’un pourrait-il lui donner un accès en écriture ?</b>\n"
+"Non. La lecture seule est intégrée à la clé et imposée par les serveurs de "
+"Google ; modifier cette appli ne peut donc pas étendre ses droits. Un accès "
+"en écriture nécessiterait une nouvelle connexion où Google vous demande "
+"clairement de « voir, modifier, créer et supprimer » vos fichiers, et où "
+"vous devriez cliquer vous-même sur <i>Autoriser</i>.\n"
+"\n"
+"<b>« Google n’a pas vérifié cette appli » ?</b>\n"
+"Google affiche cet avertissement pour les petites applis tant que leur "
+"examen n’est pas terminé. Cliquez sur <i>Paramètres avancés</i>, puis sur <i>"
+"Accéder à</i> l’appli pour continuer.\n"
+"\n"
+"<b>Où la clé est-elle conservée ?</b>\n"
+"Dans <tt>~/.config/kiro-gdrive/</tt>, accessible uniquement par vous. "
+"L’option <i>Se déconnecter</i> la supprime et demande à Google de la "
+"révoquer. Vous pouvez aussi révoquer l’accès à tout moment dans Compte "
+"Google → Sécurité → Connexions tierces."
+
+#: usr/share/kiro-gdrive/kgd_gui.py:53 po/kiro-gdrive.desktop.in:2
+msgid "KiroTux Drive"
+msgstr "KiroTux Drive"
+
+#: usr/share/kiro-gdrive/kgd_gui.py:77
+msgid "Refresh"
+msgstr "Actualiser"
+
+#: usr/share/kiro-gdrive/kgd_gui.py:81
+msgid "Restart now"
+msgstr "Redémarrer maintenant"
+
+#: usr/share/kiro-gdrive/kgd_gui.py:95
+msgid "Why sign in, and why does a browser open?"
+msgstr "Pourquoi se connecter et pourquoi un navigateur s’ouvre-t-il ?"
+
+#: usr/share/kiro-gdrive/kgd_gui.py:111
+msgid "Paste a Google Drive folder link"
+msgstr "Collez le lien d’un dossier Google Drive"
+
+#: usr/share/kiro-gdrive/kgd_gui.py:113
+msgid "Name (optional)"
+msgstr "Nom (facultatif)"
+
+#: usr/share/kiro-gdrive/kgd_gui.py:115
+msgid "Add and mount"
+msgstr "Ajouter et monter"
+
+#: usr/share/kiro-gdrive/kgd_gui.py:129
+msgid "No shares yet. Paste a folder link above."
+msgstr "Aucun partage pour le moment. Collez un lien de dossier ci-dessus."
+
+#: usr/share/kiro-gdrive/kgd_gui.py:136
+#, python-brace-format
+msgid "Shares mount read-only under {path}"
+msgstr "Les partages sont montés en lecture seule dans {path}"
+
+#: usr/share/kiro-gdrive/kgd_gui.py:144 usr/share/kiro-gdrive/kgd_gui.py:161
+msgid "Mounted"
+msgstr "Monté"
+
+#: usr/share/kiro-gdrive/kgd_gui.py:144
+msgid "Not mounted"
+msgstr "Non monté"
+
+#: usr/share/kiro-gdrive/kgd_gui.py:156
+msgid "At login"
+msgstr "À la connexion"
+
+#: usr/share/kiro-gdrive/kgd_gui.py:166
+msgid "Open folder"
+msgstr "Ouvrir le dossier"
+
+#: usr/share/kiro-gdrive/kgd_gui.py:173
+msgid "Unmount and forget (nothing is deleted on Google Drive)"
+msgstr "Démonter et oublier (rien n’est supprimé de Google Drive)"
+
+#: usr/share/kiro-gdrive/kgd_gui.py:182
+#, python-brace-format
+msgid "System ({language})"
+msgstr "Système ({language})"
+
+#: usr/share/kiro-gdrive/kgd_gui.py:185
+msgid "Language"
+msgstr "Langue"
+
+#: usr/share/kiro-gdrive/kgd_gui.py:214
+msgid ""
+"rclone is needed to mount Google Drive folders, and it is not installed."
+msgstr ""
+"rclone est nécessaire pour monter des dossiers Google Drive, mais il n’est "
+"pas installé."
+
+#: usr/share/kiro-gdrive/kgd_gui.py:215
+msgid "Install rclone"
+msgstr "Installer rclone"
+
+#: usr/share/kiro-gdrive/kgd_gui.py:217
+msgid "Signed in to Google (read-only access)"
+msgstr "Connecté à Google (accès en lecture seule)"
+
+#: usr/share/kiro-gdrive/kgd_gui.py:218
+msgid "Sign out"
+msgstr "Se déconnecter"
+
+#: usr/share/kiro-gdrive/kgd_gui.py:220
+msgid ""
+"Not signed in. Sign in once with the Google account that can open the links."
+msgstr ""
+"Non connecté. Connectez-vous une fois avec le compte Google pouvant ouvrir "
+"les liens."
+
+#: usr/share/kiro-gdrive/kgd_gui.py:221
+msgid "Sign in with Google"
+msgstr "Se connecter avec Google"
+
+#: usr/share/kiro-gdrive/kgd_gui.py:264
+msgid "Saved. KiroTux Drive shows the new language when it starts again."
+msgstr ""
+"Enregistré. KiroTux Drive affichera la nouvelle langue à son prochain "
+"démarrage."
+
+#: usr/share/kiro-gdrive/kgd_gui.py:276
+msgid "Installing rclone: type your password in the terminal window…"
+msgstr ""
+"Installation de rclone : saisissez votre mot de passe dans la fenêtre du "
+"terminal…"
+
+#: usr/share/kiro-gdrive/kgd_gui.py:278
+msgid "Signing out and unmounting all shares…"
+msgstr "Déconnexion et démontage de tous les partages…"
+
+#: usr/share/kiro-gdrive/kgd_gui.py:280
+msgid ""
+"Your browser now shows Google's sign-in page. Choose your account, click "
+"Allow, then come back here (this window waits up to 10 minutes)…"
+msgstr ""
+"La page de connexion de Google s’affiche dans votre navigateur. Choisissez "
+"votre compte, cliquez sur Autoriser, puis revenez ici (cette fenêtre attend "
+"jusqu’à 10 minutes)…"
+
+#: usr/share/kiro-gdrive/kgd_gui.py:286
+msgid "Paste a Google Drive folder link first"
+msgstr "Collez d’abord le lien d’un dossier Google Drive"
+
+#: usr/share/kiro-gdrive/kgd_gui.py:293
+msgid "Checking the folder and mounting it…"
+msgstr "Vérification et montage du dossier…"
+
+#: usr/share/kiro-gdrive/kgd_gui.py:298
+#, python-brace-format
+msgid "Mounting “{name}”…"
+msgstr "Montage de « {name} »…"
+
+#: usr/share/kiro-gdrive/kgd_gui.py:300
+#, python-brace-format
+msgid "Unmounting “{name}”…"
+msgstr "Démontage de « {name} »…"
+
+#: usr/share/kiro-gdrive/kgd_gui.py:305
+msgid "Updating mount at login…"
+msgstr "Mise à jour du montage à la connexion…"
+
+#: usr/share/kiro-gdrive/kgd_gui.py:311
+#, python-brace-format
+msgid "Removing “{name}”…"
+msgstr "Suppression de « {name} »…"
+
+#: po/kiro-gdrive.desktop.in:3
+msgid "Google Drive Folder Mounter"
+msgstr "Outil de montage de dossiers Google Drive"
+
+#: po/kiro-gdrive.desktop.in:4
+msgid "Mount shared Google Drive folders read-only in your home folder"
+msgstr ""
+"Montez en lecture seule des dossiers Google Drive partagés dans votre "
+"dossier personnel"
+
+#: po/kiro-gdrive.desktop.in:10
+msgid "google;drive;gdrive;mount;rclone;share;cloud"
+msgstr "google;drive;gdrive;montage;rclone;partage;cloud"

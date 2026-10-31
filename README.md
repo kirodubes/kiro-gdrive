@@ -74,6 +74,14 @@ ssh -L 53682:127.0.0.1:53682 user@remote-machine
 kgd login --no-browser                      # then open the printed link on your desktop
 ```
 
+## Languages
+
+KiroTux Drive follows your system language: English, Dutch, German, Spanish, French, Portuguese (Brazil),
+Russian, Hungarian, Italian, Turkish, Polish, Japanese, Chinese (simplified) and Romanian. Portugal gets Brazilian
+Portuguese and Taiwan/Hong Kong simplified Chinese. To use another language, pick it in the dropdown at the top of
+the window and press **Restart now**; the choice is kept in `~/.config/kiro-gdrive/prefs.json`. The command line
+prints its results in the same language; its help text stays English.
+
 ## Where things live
 
 | What                       | Path                                           |

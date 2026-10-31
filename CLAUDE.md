@@ -67,6 +67,17 @@ usr/share/kiro-gdrive/
   a 7-day lifetime, which would silently break mount-at-login every week. In production but unverified is fine:
   that only means the warning screen and the 100-user cap.
 
+## Translations (since 2026-10-31)
+
+- `kgd_i18n.py` (copy of the premium apps' i18n module): domain `kiro-gdrive`, catalogs in `usr/share/locale`. The
+  header-bar dropdown saves the choice in `~/.config/kiro-gdrive/prefs.json` (the app's only prefs file);
+  `KGD_LANGUAGE` beats it and the system language. Sibling fallback pt→pt_BR, zh→zh_CN.
+- Every visible string goes through `_()` as a whole sentence with named placeholders; counts use `ngettext`.
+  `kgd_core` messages are translated (GUI and CLI show them), and so is the kiro-news feed item. Never translated:
+  "KiroTux Drive", the CLI help and `list` columns, `check` reports (journal), rclone/systemd output, log lines.
+- After changing any visible text: `po/make-mo.sh`. Edit the menu entry in `po/kiro-gdrive.desktop.in`, never in
+  `usr/share/applications/` (overwritten). Rules and tools: Kiro-HQ `TRANSLATIONS/`.
+
 ## Development
 
 - `ruff check .` must pass. Max line length 120.
